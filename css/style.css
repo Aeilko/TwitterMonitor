@@ -1,0 +1,76 @@
+.no-show{
+	display: none;
+}
+
+blockquote.tweet{
+	position: relative;
+	min-height: 140px;
+	max-width: 650px;
+	margin:0;
+	padding: 20px;
+	padding-left: 140px;
+	padding-bottom: 40px;
+
+	border-width: 0 1px 1px;
+	border-color: #e6ecf0;
+	border-style: solid;
+
+	font-family: Arial,sans-serif;
+	font-size: 14px;
+	line-height: 18px;
+}
+
+blockquote.tweet.dark{
+	background-color: #eeeeee;
+}
+
+blockquote.tweet:first-of-type{
+	border-top-width: 1px;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+}
+
+.tweet a{
+	color: #FF0000;
+}
+
+.tweet img.profile_image{
+	position: absolute;
+	left: 20px;
+	width: 100px;
+	height: 100px;
+	border-radius: 10px;
+	object-fit: cover;
+}
+
+.tweet .user{
+	font-size: 13px;
+	color: #657786;
+}
+
+.tweet .user a{
+	font-size: 14px;
+	font-weight: bold;
+	color: #000;
+}
+
+.tweet .date{
+	color: #657786;
+	font-size: 13px;
+	position: absolute;
+	display: block;
+	bottom: 20px;
+}
+
+.tweet .check_tweet{
+	float: right;
+	display: inline-block;
+}
+
+.tweet .check_tweet a{
+	color: #FFF;
+}
+
+.tweet .check_tweet a.btn-success{
+	margin-right: 25px;
+}
