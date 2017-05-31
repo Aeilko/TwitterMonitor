@@ -10,7 +10,8 @@ $num = n($aQuery);
 </div>
 
 <?php
-$aQuery = q("SELECT twitterID, replyTo, retweet FROM twitter_tweets WHERE twitterUser = '".$TwitterUser['twitterID']."' AND DATE_ADD(check_date, INTERVAL 1 YEAR) < NOW() ORDER BY check_date ASC LIMIT 100");
+// Sort by twitterID instead of a date because the time for older tweets doesn't work so this keeps it in chronological order
+$aQuery = q("SELECT twitterID, replyTo, retweet FROM twitter_tweets WHERE twitterUser = '".$TwitterUser['twitterID']."' AND DATE_ADD(check_date, INTERVAL 1 YEAR) < NOW() ORDER BY twitterID ASC LIMIT 100");
 while($aFetch = f($aQuery)){
 	if($aFetch['retweet'] != 0){
 		showTweet($aFetch['retweet'], $aFetch['twitterID']);
