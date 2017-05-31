@@ -13,6 +13,7 @@ function showTweet($tweetId, $originalId = '', $reply = false){
 	}
 
 	$user = f($user);
+	$entities = unserialize($tweet['entities']);
 
 
 	echo '<blockquote class="tweet'.($reply ? " dark" : "").'"'.(!empty($originalId) ? " data-originalID='".$originalId."'" : "").'>';
@@ -25,8 +26,23 @@ function showTweet($tweetId, $originalId = '', $reply = false){
 		}
 		echo '<img src="'.$user['avatar'].'" class="profile_image" />';
 		echo '<span class="user"><a href="https://www.twitter.com/'.$user['screen_name'].'" target="_blank">'.$user['name'].'</a> @'.$user['screen_name'].'</span>';
-		echo '<p>'.tweetFormatEntities($tweet['text'], unserialize($tweet['entities'])).'</p>';
+		echo '<p>'.tweetFormatEntities($tweet['text'], $entities).'</p>';
+		
+		// Show media
+		if(isset($entities->media) && is_array($entities->media)){
+			foreach($entities->media as $media){
+				if($media->type == 'photo'){
+					echo "<img src='".$media->media_url_https."' class='media' />";
+				}
+				else{
+					echo infomsg("Unknown media type! Type: '".$media->type."'");
+				}
+			}
+		}
+
+		// Date (with tweet link)
 		echo '<a href="https://www.twitter.com/'.$user['screen_name'].'/status/'.$tweet['twitterID'].'" target="_blank"><span class="date">'.date("Y-m-d H:i", strtotime($tweet['date'])).'</span></a>';
+
 	echo '</blockquote>';
 
 }
