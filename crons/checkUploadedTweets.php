@@ -8,7 +8,7 @@ error_reporting(-1);
 $base = dirname(dirname(__FILE__))."/";
 
 // Home is the domains home folder. (first is cron, second is public)
-//$home = dirname(dirname(dirname(__FILE__)));
+//$home = dirname(dirname(dirname(__FILE__)))."/";
 $home = dirname(dirname(__FILE__))."/../../";
 
 // Instellingen, MySQL verbinding en methodes
@@ -45,7 +45,7 @@ if(count($twitter) > 2){
 
 			// Only handle one file at once since Twitter requests are time consuming.
 			$file = $userDir[2];
-			echo "Reading file: ".$file."<br />";
+			echo "Reading file: ".$file."\n";
 			$string = file_get_contents($home."files/twitter/".$userID."/".$file);
 			$string = preg_replace("/Grailbird\.data\.tweets_(.+)/i", "", $string);
 			$tweets = json_decode($string);
@@ -54,7 +54,7 @@ if(count($twitter) > 2){
 				saveTweet($tweet);
 				$i++;
 			}
-			echo "Saved ".$i." tweets<br />";
+			echo "Saved ".$i." tweets\n";
 
 			// Delete file once it's all saved.
 			unlink($home."files/twitter/".$userID."/".$file);

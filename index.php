@@ -1,9 +1,12 @@
 <?php
 require_once("inc/header.php");
+
+$aQuery = q("SELECT id FROM twitter_tweets WHERE twitterUser = '".$TwitterUser['twitterID']."' AND DATE_ADD(check_date, INTERVAL 1 YEAR) < NOW()");
+$num = n($aQuery);
 ?>
 
 <div class="page-header">
-	<h1>Twitter monitor</h1>
+	<h1>Twitter monitor<?php echo ($num > 0 ? " - ".$num." resterend" : "" ); ?></h1>
 </div>
 
 <?php
