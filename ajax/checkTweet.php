@@ -46,7 +46,16 @@ if(isset($_POST['tweetID']) && is_numeric($_POST['tweetID']) && isset($_POST['ty
 				echo "ok";
 			}
 			else{
-				echo "couldn't delete tweet from twitter, error (".$result->errors[0]->code."): '".$result->errors[0]->message."'";
+                // Some error occured, check if we can handle this error
+                // List of error codes which indicate the tweet/retweer no longer exists.
+                $alreadyDeletedErrors = array(144, 179);
+				if(in_array($result->errors[0]->code, $alreadyDeletedErrors)){
+                    q("UPDATE twitter_tweets SET check_date = NOW(), deleted = '1' WHERE id = '".$aFetch['id']."'");
+                    echo "ok";
+                }
+				else{
+                    echo "couldn't delete tweet from twitter, error (".$result->errors[0]->code."): '".$result->errors[0]->message."'";
+                }
 			}
 		}
 	}

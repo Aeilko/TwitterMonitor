@@ -1,1 +1,5 @@
+# Project files
 /inc/settings.php
+
+# JetBrains files
+/.idea
