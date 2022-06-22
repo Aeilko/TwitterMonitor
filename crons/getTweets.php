@@ -3,7 +3,7 @@ ini_set('display_startup_errors',1);
 ini_set('display_errors',1);
 error_reporting(-1);
 
-// Base is the domains public html home folder. (first is cron, second is public)
+// Base is the domains public html home folder
 //$base = dirname(dirname(dirname(__FILE__)))."/public_html/twitter/";
 $base = dirname(dirname(__FILE__))."/";
 

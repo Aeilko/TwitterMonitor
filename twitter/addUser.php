@@ -12,7 +12,7 @@ require_once('oauth/twitteroauth.php');
 $connection = new TwitterOAuth($TwitterKey, $TwitterSecret);
  
 // Tijdelijke gegevens ophalen
-$request_token = $connection->getRequestToken($URL."twitter/back.php");
+$request_token = $connection->getRequestToken();
 
 // Tijdelijke gegevens opslaan in sessies
 $_SESSION['oauth_token'] = $token = $request_token['oauth_token'];
