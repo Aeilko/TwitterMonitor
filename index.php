@@ -1,7 +1,7 @@
 <?php
 require_once("inc/header.php");
 
-$aQuery = q("SELECT id FROM twitter_tweets WHERE deleted != '1' AND twitterUser = '".$TwitterUser['twitterID']."' AND DATE_ADD(check_date, INTERVAL 5 YEAR) < NOW()");
+$aQuery = q("SELECT id FROM twitter_tweets WHERE deleted != '1' AND twitterUser = '".$TwitterUser['twitterID']."' AND (check_date = date OR DATE_ADD(check_date, INTERVAL ".$YEARSTHRESHOLD." YEAR) < NOW())");
 $num = n($aQuery);
 ?>
 
@@ -11,7 +11,7 @@ $num = n($aQuery);
 
 <?php
 // Sort by twitterID instead of a date because the time for older tweets doesn't work so this keeps it in chronological order
-$aQuery = q("SELECT twitterID, replyTo, retweet FROM twitter_tweets WHERE deleted != '1' AND twitterUser = '".$TwitterUser['twitterID']."' AND DATE_ADD(check_date, INTERVAL 5 YEAR) < NOW() ORDER BY twitterID ASC LIMIT 100");
+$aQuery = q("SELECT twitterID, replyTo, retweet FROM twitter_tweets WHERE deleted != '1' AND twitterUser = '".$TwitterUser['twitterID']."' AND (check_date = date OR DATE_ADD(check_date, INTERVAL ".$YEARSTHRESHOLD." YEAR) < NOW()) ORDER BY twitterID ASC LIMIT 100");
 while($aFetch = f($aQuery)){
 	if($aFetch['retweet'] != 0){
 		showTweet($aFetch['retweet'], $aFetch['twitterID']);
